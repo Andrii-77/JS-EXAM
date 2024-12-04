@@ -6,7 +6,7 @@ document.body.appendChild(divWrap);
 //-------створюю header зі слово Test------
 const header = document.createElement('header');
 header.classList.add("cl_header");
-header.innerText ='Test';
+header.innerText = 'Test';
 divWrap.appendChild(header);
 
 //-------створюю поле для вводу від клієнта-------
@@ -43,7 +43,33 @@ forButtons.append(butSortByName, butSortByValue, butDelete);
 //-------створюю функцію для кнопки Add-------
 formInput.onsubmit = function (ev) {
     ev.preventDefault();
-
+    // прописати захист від пустого поля вводу і без =!!!!!!!!!!!!!!!!!!!!!!
+    let userInput = this.inputUser.value;
+    let splitUserInput = userInput.split('=');
+    let userName = splitUserInput[0].trim();
+    let userValue = splitUserInput[1].trim();
+    if (!!userName.match((/[^A-Za-z\d]+/g)) || !!userValue.match((/[^A-Za-z\d]+/g))) {
+        console.log('Wrong symbol!!!')
+    } else {
+        let userNameValue = userName + '=' + userValue;
+        let p = document.createElement('p');
+        p.innerText = userNameValue;
+        forSort.appendChild(p);
+    }
 };
 
+//-------створюю функцію для кнопки Delete-------
+butDelete.onclick = function () {
+    const pForDelete = forSort.querySelectorAll('p');
+    pForDelete.forEach(item => item.remove());
+};
 
+//-------створюю функцію для кнопки Sort by Name-------
+butSortByName.onclick = function () {
+    console.log('NAME!!!');
+};
+
+//-------створюю функцію для кнопки Sort by Value-------
+butSortByValue.onclick = function () {
+    console.log('VALUE!!!');
+};

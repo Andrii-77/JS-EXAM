@@ -80,9 +80,10 @@ label {
     border: 2px solid #ddd8d8;
     color: gray;
     font-size: 18px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    overflow: auto;
+    /*display: flex;*/
+    /*justify-content: flex-start;*/
+    /*align-items: flex-start;*/
 }
 
 .cl_forButtons {
