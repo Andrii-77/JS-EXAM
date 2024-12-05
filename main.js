@@ -40,6 +40,9 @@ butDelete.innerText = "Delete";
 butDelete.classList.add("cl_butDelete");
 forButtons.append(butSortByName, butSortByValue, butDelete);
 
+//-------Створюю масив для наповнення інпутами-------
+let arr = [];
+
 //-------створюю функцію для кнопки Add-------
 formInput.onsubmit = function (ev) {
     ev.preventDefault();
@@ -55,21 +58,62 @@ formInput.onsubmit = function (ev) {
         let p = document.createElement('p');
         p.innerText = userNameValue;
         forSort.appendChild(p);
+        arr.push(userNameValue);
     }
 };
 
-//-------створюю функцію для кнопки Delete-------
-butDelete.onclick = function () {
+//-------створюю функцію для кнопки Delete, вона буде використовуватись ще-------
+function deleteAllP() {
     const pForDelete = forSort.querySelectorAll('p');
     pForDelete.forEach(item => item.remove());
+}
+
+butDelete.onclick = function () {
+    deleteAllP();
+    arr = [];
 };
 
 //-------створюю функцію для кнопки Sort by Name-------
+function forNameSorting (a, b) {
+    if (a.split('=')[0] > b.split('=')[0]) {
+        return 1;
+    }
+    if (a.split('=')[0] < b.split('=')[0]) {
+        return -1;
+    }
+     {
+        return 0;
+    }
+}
+
+function forPManipulation() {
+    deleteAllP();
+    for (const element of arr) {
+        let p = document.createElement('p');
+        p.innerText = element;
+        forSort.appendChild(p);
+    }
+}
+
 butSortByName.onclick = function () {
-    console.log('NAME!!!');
+    arr.sort(forNameSorting);
+    forPManipulation();
 };
 
 //-------створюю функцію для кнопки Sort by Value-------
+function forValueSorting (a, b) {
+    if (a.split('=')[1] > b.split('=')[1]) {
+        return 1;
+    }
+    if (a.split('=')[1] < b.split('=')[1]) {
+        return -1;
+    }
+    {
+        return 0;
+    }
+}
+
 butSortByValue.onclick = function () {
-    console.log('VALUE!!!');
+    arr.sort(forValueSorting);
+    forPManipulation();
 };
