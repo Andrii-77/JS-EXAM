@@ -43,22 +43,23 @@ forButtons.append(butSortByName, butSortByValue, butDelete);
 //-------Створюю масив для наповнення інпутами-------
 let arr = [];
 
-//-------створюю функцію для кнопки Add-------
+// -------створюю функцію для кнопки Add-------
+
 formInput.onsubmit = function (ev) {
     ev.preventDefault();
-    // прописати захист від пустого поля вводу і без =!!!!!!!!!!!!!!!!!!!!!!
     let userInput = this.inputUser.value;
-    let splitUserInput = userInput.split('=');
-    let userName = splitUserInput[0].trim();
-    let userValue = splitUserInput[1].trim();
-    if (!!userName.match((/[^A-Za-z\d]+/g)) || !!userValue.match((/[^A-Za-z\d]+/g))) {
-        console.log('Wrong symbol!!!')
-    } else {
+    if (!userInput.length === 0 || !!userInput.match(/^\s*[A-Za-z\d]+\s*=\s*[A-Za-z\d]+\s*$/)) {
+        let splitUserInput = userInput.split('=');
+        let userName = splitUserInput[0].trim();
+        let userValue = splitUserInput[1].trim();
         let userNameValue = userName + '=' + userValue;
         let p = document.createElement('p');
         p.innerText = userNameValue;
         forSort.appendChild(p);
         arr.push(userNameValue);
+        this.inputUser.value = '';
+    } else {
+        console.log('Not valid input!!!');
     }
 };
 
@@ -74,14 +75,14 @@ butDelete.onclick = function () {
 };
 
 //-------створюю функцію для кнопки Sort by Name-------
-function forNameSorting (a, b) {
+function forNameSorting(a, b) {
     if (a.split('=')[0] > b.split('=')[0]) {
         return 1;
     }
     if (a.split('=')[0] < b.split('=')[0]) {
         return -1;
     }
-     {
+    {
         return 0;
     }
 }
@@ -101,7 +102,7 @@ butSortByName.onclick = function () {
 };
 
 //-------створюю функцію для кнопки Sort by Value-------
-function forValueSorting (a, b) {
+function forValueSorting(a, b) {
     if (a.split('=')[1] > b.split('=')[1]) {
         return 1;
     }
