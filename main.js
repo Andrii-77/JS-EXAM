@@ -26,7 +26,7 @@ main.classList.add("cl_main");
 const forSort = document.createElement('div');
 forSort.classList.add("cl_forSort");
 const forButtons = document.createElement('div');
-forButtons.classList.add("cl_forButtons");
+forButtons.classList.add("cl_forButtons", "cl_forMobileButtons");
 divWrap.appendChild(main);
 main.append(forSort, forButtons);
 
@@ -35,10 +35,15 @@ const butSortByName = document.createElement('button');
 butSortByName.innerText = "Sort by Name";
 const butSortByValue = document.createElement('button');
 butSortByValue.innerText = "Sort by Value";
-const butDelete = document.createElement('button');
-butDelete.innerText = "Delete";
-butDelete.classList.add("cl_butDelete");
-forButtons.append(butSortByName, butSortByValue, butDelete);
+const butDeleteAll = document.createElement('button');
+butDeleteAll.innerText = "Delete All";
+butDeleteAll.classList.add("cl_butDelete");
+
+const butDeleteChosen = document.createElement('button');
+butDeleteChosen.innerText = "Delete Chosen";
+butDeleteChosen.classList.add("cl_butDelete");
+
+forButtons.append(butSortByName, butSortByValue, butDeleteAll, butDeleteChosen);
 
 //-------Створюю масив для наповнення інпутами-------
 let arr = [];
@@ -56,6 +61,9 @@ formInput.onsubmit = function (ev) {
         let p = document.createElement('p');
         p.innerText = userNameValue;
         forSort.appendChild(p);
+        p.onclick = function () {
+            p.classList.toggle('chosen');
+        };
         arr.push(userNameValue);
         this.inputUser.value = '';
     } else {
@@ -69,7 +77,7 @@ function deleteAllP() {
     pForDelete.forEach(item => item.remove());
 }
 
-butDelete.onclick = function () {
+butDeleteAll.onclick = function () {
     deleteAllP();
     arr = [];
 };
@@ -92,6 +100,9 @@ function forPManipulation() {
     for (const element of arr) {
         let p = document.createElement('p');
         p.innerText = element;
+        p.onclick = function () {
+            p.classList.toggle('chosen');
+        };
         forSort.appendChild(p);
     }
 }
@@ -117,4 +128,14 @@ function forValueSorting(a, b) {
 butSortByValue.onclick = function () {
     arr.sort(forValueSorting);
     forPManipulation();
+};
+
+// створюю функції для видалення вибраних обєктів в масиві
+butDeleteChosen.onclick = function () {
+
+    let pForDeleteChosen = forSort.querySelectorAll('.chosen');
+    for (const node of pForDeleteChosen) {
+        arr.splice(arr.indexOf(node.textContent), 1);
+    }
+    pForDeleteChosen.forEach(item => item.remove());
 };

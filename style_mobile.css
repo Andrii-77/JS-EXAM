@@ -34,13 +34,18 @@
     }
 
 
-    .cl_forButtons {
+    .cl_forMobileButtons {
         width: 90%;
-        height: 25%;
+        height: 15%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
     }
 
     .cl_forButtons > button {
-        width: 100%;
+        width: 40%;
         margin: 5% 0 0 0;
 
     }

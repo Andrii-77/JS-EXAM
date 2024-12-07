@@ -24,12 +24,10 @@ body {
     width: 768px;
     height: 481px;
     background-color: #fdfdfd;
-    /*padding: 5% 0;*/
 }
 
 .cl_header {
     height: 7%;
-    /*background-color: pink;*/
     margin: 5% 5% 3% 5%;
     font-size: 23px;
     font-weight: 600;
@@ -50,8 +48,6 @@ input {
 
 label {
     display:block;
-    /*height: 20%;*/
-    /*flex-direction: column;*/
 }
 
 .btn_Add {
@@ -81,9 +77,6 @@ label {
     color: gray;
     font-size: 18px;
     overflow: auto;
-    /*display: flex;*/
-    /*justify-content: flex-start;*/
-    /*align-items: flex-start;*/
 }
 
 .cl_forButtons {
@@ -103,4 +96,8 @@ label {
 
 .cl_forButtons > .cl_butDelete {
     margin-top: 10%;
+}
+
+.chosen {
+    background-color: lightgreen;
 }
